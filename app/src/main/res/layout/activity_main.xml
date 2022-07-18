@@ -41,4 +41,29 @@
         android:textAllCaps="false"
         app:cornerRadius="20dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="#FF5722"
+        android:text="@string/menus"
+        android:onClick="navigateToMenusActivity"
+        android:textAllCaps="false"
+        app:cornerRadius="20dp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="#FF5722"
+        android:text="Alert dialog"
+        android:onClick="showAlertDialog"
+        android:textAllCaps="false"
+        app:cornerRadius="20dp" />
+
+
+
 </LinearLayout>
