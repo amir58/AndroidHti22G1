@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.amirmohammed.hti22android.R;
+import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.names.NamesActivity;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +22,72 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        arrayListOfObjects();
+    }
+
+    private void arrayList(){
+        // String[] names = new String[10];
+        // String[] names = {"",""};
+
+        // ArrayList<DataType> varName = new ArrayList();
+        ArrayList<String> names = new ArrayList<>();
+
+        // CRUD Operations => Create , Read , Update , Delete
+
+        names.add("Ali");
+        names.add("Ahmed");
+        names.add("Mohammed");
+
+//        names.addAll();
+
+        System.out.println(names.get(0));
+
+        for (String name : names) {
+            System.out.println(name);
+        }
+
+        names.clear();
+
+//        names.remove("Ahmed");
+//        names.remove(0);
+
+        names.add(0, "Sayed"); // update
+
+        names.contains("Ali");
+
+        names.indexOf("Ali");
+
+        names.isEmpty();
+
+//        names.size() > 0;
+
+        names.size();
+
+    }
+
+    private void arrayListOfObjects(){
+        // ArrayList<ClassName> varName = new ArrayList();
+        ArrayList<MyContact> myContacts = new ArrayList<>();
+
+        MyContact myContact1 = new MyContact("Ali", "010");
+        myContacts.add(myContact1);
+
+        MyContact myContact2 = new MyContact("Mahmoud", "011");
+        myContacts.add(myContact2);
+
+        // 0 -> Ali
+        // 1 -> Ahmed
+        // 2 -> Mohammed
+
+        // 0 -> {"name":"Ali", "phone":"010"}
+        // 1 -> {"name":"Mahmoud", "phone":"011"}
+
+        System.out.println("- - - - - -");
+        System.out.println(myContacts.get(0).getName());
+        System.out.println(myContacts.get(0).getPhone());
+        System.out.println("- - - - - -");
+
+        myContacts.get(1).printContactData();
     }
 
     public void navigateToCalculate(View view) {
@@ -47,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .show();
     }
+
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
@@ -60,5 +131,10 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public void navigateToNamesActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, NamesActivity.class);
+        startActivity(intent);
     }
 }

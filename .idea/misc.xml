@@ -11,9 +11,11 @@
         <entry key="app/src/main/res/layout/activity_lifecycle.xml" value="0.11928174433518597" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_menus.xml" value="0.2484375" />
+        <entry key="app/src/main/res/layout/activity_names.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/activity_pick_image.xml" value="0.23514322359982898" />
         <entry key="app/src/main/res/layout/activity_receive.xml" value="0.20735356990166737" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.12048192771084337" />
+        <entry key="app/src/main/res/layout/item_names.xml" value="0.24375" />
         <entry key="app/src/main/res/menu/context_menu.xml" value="0.246875" />
         <entry key="app/src/main/res/menu/optional_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/pop_up_menu.xml" value="0.246875" />
