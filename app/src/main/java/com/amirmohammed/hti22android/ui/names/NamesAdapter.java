@@ -1,14 +1,18 @@
 package com.amirmohammed.hti22android.ui.names;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amirmohammed.hti22android.R;
+import com.amirmohammed.hti22android.models.MyContact;
 
 import java.util.ArrayList;
 
@@ -20,9 +24,9 @@ import java.util.ArrayList;
 // 6 : onBindViewHolder -> setText , onClick
 public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHolder> {
 
-    private final ArrayList<String> names;
+    private final ArrayList<MyContact> names;
 
-    public NamesAdapter(ArrayList<String> names) {
+    public NamesAdapter(ArrayList<MyContact> names) {
         this.names = names;
     }
 
@@ -35,9 +39,42 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull NamesViewHolder holder, int position) {
-        String currentName = names.get(position);
+        String currentName = names.get(position).getName();
+        String currentPhone = names.get(position).getPhone();
 
         holder.textView.setText(currentName);
+        holder.textViewPhone.setText(currentPhone);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 1 : show Alert dialog
+                // 2 : Delete -> {
+                // 2.1 remove names by position
+                // 2.2 notify adapter for remove item
+                // }
+
+                new AlertDialog.Builder(view.getContext())
+                        .setMessage("Are you sure to delete " + currentName)
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                names.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -47,10 +84,12 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
 
     class NamesViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
+        TextView textViewPhone;
 
         public NamesViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tvName);
+            textViewPhone = itemView.findViewById(R.id.tvPhone);
         }
     }
 

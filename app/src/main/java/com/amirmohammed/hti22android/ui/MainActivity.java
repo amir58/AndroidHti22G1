@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         // 0 -> {"name":"Ali", "phone":"010"}
         // 1 -> {"name":"Mahmoud", "phone":"011"}
 
+        // user_id
+
         System.out.println("- - - - - -");
         System.out.println(myContacts.get(0).getName());
         System.out.println(myContacts.get(0).getPhone());
