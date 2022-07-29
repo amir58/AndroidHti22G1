@@ -5,8 +5,8 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,9 +25,11 @@ import java.util.ArrayList;
 public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHolder> {
 
     private final ArrayList<MyContact> names;
+    private final IUpdateContact iUpdateContact;
 
-    public NamesAdapter(ArrayList<MyContact> names) {
+    public NamesAdapter(ArrayList<MyContact> names, IUpdateContact iUpdateContact) {
         this.names = names;
+        this.iUpdateContact = iUpdateContact;
     }
 
     @NonNull
@@ -68,13 +70,13 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
             }
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.imageViewUpdateContact.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-
-                return false;
+            public void onClick(View view) {
+                iUpdateContact.onUpdateContactClick(currentName, currentPhone, holder.getAdapterPosition());
             }
         });
+
     }
 
     @Override
@@ -85,11 +87,13 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
     class NamesViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         TextView textViewPhone;
+        ImageView imageViewUpdateContact;
 
         public NamesViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tvName);
             textViewPhone = itemView.findViewById(R.id.tvPhone);
+            imageViewUpdateContact = itemView.findViewById(R.id.ivUpdateContact);
         }
     }
 

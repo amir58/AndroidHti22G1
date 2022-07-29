@@ -44,11 +44,22 @@ public class NamesActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.rvNames);
 
-        namesAdapter = new NamesAdapter(names);
+        namesAdapter = new NamesAdapter(names, iUpdateContact);
 
         recyclerView.setAdapter(namesAdapter);
 
     }
+
+    IUpdateContact iUpdateContact = new IUpdateContact() {
+        @Override
+        public void onUpdateContactClick(String contactName, String contactPhone, int contactPosition) {
+            Intent intent = new Intent(NamesActivity.this, UpdateContactActivity.class);
+            intent.putExtra("contactName", contactName);
+            intent.putExtra("contactPhone", contactPhone);
+            intent.putExtra("contactPosition", contactPosition);
+            startActivityForResult(intent, 6);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,15 +70,16 @@ public class NamesActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent(NamesActivity.this, AddContactActivity.class);
-        startActivityForResult(intent,5);
+        startActivityForResult(intent, 5);
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("onActivityResult");
 
-        if (requestCode == 5 && resultCode == RESULT_OK && data !=null){
+        if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");
             String contactPhone = data.getStringExtra("contactPhone");
 
@@ -76,7 +88,19 @@ public class NamesActivity extends AppCompatActivity {
             names.add(myContact);
 
             namesAdapter.notifyDataSetChanged();
+
+        } else if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
+            String contactName = data.getStringExtra("contactName");
+            String contactPhone = data.getStringExtra("contactPhone");
+            int contactPosition = data.getIntExtra("contactPosition", -1);
+
+            MyContact myContact = new MyContact(contactName, contactPhone);
+
+            names.add(contactPosition, myContact);
+
+            namesAdapter.notifyItemChanged(contactPosition);
         }
+
 
     }
 }

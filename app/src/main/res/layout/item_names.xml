@@ -10,27 +10,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:text="Name"
-            android:textSize="@dimen/_23ssp" />
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:text="01116036522"
-            android:textSize="@dimen/_22ssp" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:text="Name"
+                android:textSize="@dimen/_23ssp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="casual"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="01116036522"
+                android:textSize="@dimen/_22ssp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivUpdateContact"
+            android:padding="@dimen/_12sdp"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_50ssp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_edit_24"/>
 
     </LinearLayout>
 

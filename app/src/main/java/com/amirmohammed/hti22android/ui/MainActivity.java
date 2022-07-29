@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.apis.NewsActivity;
 import com.amirmohammed.hti22android.ui.names.NamesActivity;
 
 import java.util.ArrayList;
@@ -137,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateToNamesActivity(View view) {
         Intent intent = new Intent(MainActivity.this, NamesActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigateToNewsActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, NewsActivity.class);
         startActivity(intent);
     }
 }
