@@ -1,6 +1,7 @@
 package com.amirmohammed.hti22android.ui.apis;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -26,15 +27,24 @@ public class NewsActivity extends AppCompatActivity {
 
         IApis iApis = retrofit.create(IApis.class);
 
-        iApis.getNews().enqueue(new Callback<NewsResponse>() {
+        // 200 ,
+        iApis.getNews2("eg", "business").enqueue(new Callback<NewsResponse>() {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
-                System.out.println(response.body().getArticles().size());
+                System.out.println("Apis => "+ response.isSuccessful());
+                System.out.println("Apis => "+ response.code());
 
-                for (ArticlesItem article : response.body().getArticles()) {
-                    System.out.println("- - - - - - - - - - -");
-                    System.out.println(article.getTitle());
+
+                if (response.isSuccessful()){
+                    System.out.println(response.body().getArticles().size());
+
+                    RecyclerView recyclerView = findViewById(R.id.rvNews);
+                    NewsAdapter newsAdapter = new NewsAdapter(response.body().getArticles());
+                    recyclerView.setAdapter(newsAdapter);
+
                 }
+
+
             }
 
             @Override
