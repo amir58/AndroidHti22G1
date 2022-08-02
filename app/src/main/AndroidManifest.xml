@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Hti22Android"
         tools:targetApi="31">
         <activity
+            android:name=".ui.fragments.MainFActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.apis.ArticleDetailsActivity"
             android:exported="false" />
         <activity
@@ -44,14 +47,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <loginData android:mimeType="image/*" />
+                <data android:mimeType="image/*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <loginData android:mimeType="text/plain" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <activity
