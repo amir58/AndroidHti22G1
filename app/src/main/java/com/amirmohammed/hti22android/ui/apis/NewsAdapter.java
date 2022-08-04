@@ -6,10 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.amirmohammed.hti22android.R;
+import com.amirmohammed.hti22android.databinding.ItemNewsBinding;
 import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
@@ -23,17 +27,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     @NonNull
     @Override
     public NewsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new NewsHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_news, parent, false));
+        return new NewsHolder(ItemNewsBinding.inflate(LayoutInflater
+                .from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsHolder holder, int position) {
         ArticlesItem articleItem = articles.get(position);
 
-        holder.textViewTitle.setText(articleItem.getTitle());
+        holder.binding.tvNewsTitle.setText(articleItem.getTitle());
 
-        Glide.with(holder.itemView).load(articleItem.getImageUrl()).into(holder.imageView);
+        Glide.with(holder.itemView).load(articleItem.getImageUrl())
+                .into(holder.binding.ivNews);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +65,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
     }
 
     class NewsHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView textViewTitle;
+        ItemNewsBinding binding;
 
-        public NewsHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.ivNews);
-            textViewTitle = itemView.findViewById(R.id.tvNewsTitle);
+        public NewsHolder(@NonNull ItemNewsBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 

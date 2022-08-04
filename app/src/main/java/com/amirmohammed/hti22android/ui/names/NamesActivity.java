@@ -14,6 +14,7 @@ import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.MyContact;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Data : ArrayList
 // CustomItem -> layout
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 // NamesActivity -> java code , ui
 public class NamesActivity extends AppCompatActivity {
 
-    ArrayList<MyContact> names = new ArrayList<>();
+    List<MyContact> names = new ArrayList<>();
     NamesAdapter namesAdapter; // Make adapter as a global variable
 
     @Override
@@ -29,18 +30,21 @@ public class NamesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_names);
 
-        names.add(new MyContact("Amir", "01116036522"));
-        names.add(new MyContact("Ali", "01030936083"));
-        names.add(new MyContact("Ahmed", "01256052932"));
-        names.add(new MyContact("Amir", "01116036522"));
-        names.add(new MyContact("Ali", "01030936083"));
-        names.add(new MyContact("Ahmed", "01256052932"));
-        names.add(new MyContact("Amir", "01116036522"));
-        names.add(new MyContact("Ali", "01030936083"));
-        names.add(new MyContact("Ahmed", "01256052932"));
-        names.add(new MyContact("Amir", "01116036522"));
-        names.add(new MyContact("Ali", "01030936083"));
-        names.add(new MyContact("Ahmed", "01256052932"));
+        names = ContactsDatabase.init(NamesActivity.this)
+                .contactsDao().getContacts();
+
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
 
         RecyclerView recyclerView = findViewById(R.id.rvNames);
 
@@ -89,16 +93,26 @@ public class NamesActivity extends AppCompatActivity {
 
             namesAdapter.notifyDataSetChanged();
 
+            ContactsDatabase.init(NamesActivity.this)
+                    .contactsDao().insertContact(myContact);
+
         } else if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");
             String contactPhone = data.getStringExtra("contactPhone");
             int contactPosition = data.getIntExtra("contactPosition", -1);
 
-            MyContact myContact = new MyContact(contactName, contactPhone);
+            MyContact myContact = names.get(contactPosition);
+            myContact.setName(contactName);
+            myContact.setPhone(contactPhone);
 
+            names.remove(contactPosition);
             names.add(contactPosition, myContact);
 
             namesAdapter.notifyItemChanged(contactPosition);
+
+            ContactsDatabase.init(NamesActivity.this)
+                    .contactsDao().updateContact(myContact);
+
         }
 
 

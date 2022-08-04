@@ -15,6 +15,7 @@ import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.MyContact;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // 1 : Constructor -> data
 // 2 : ViewHolder class -> define views
@@ -24,10 +25,10 @@ import java.util.ArrayList;
 // 6 : onBindViewHolder -> setText , onClick
 public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHolder> {
 
-    private final ArrayList<MyContact> names;
+    private final List<MyContact> names;
     private final IUpdateContact iUpdateContact;
 
-    public NamesAdapter(ArrayList<MyContact> names, IUpdateContact iUpdateContact) {
+    public NamesAdapter(List<MyContact> names, IUpdateContact iUpdateContact) {
         this.names = names;
         this.iUpdateContact = iUpdateContact;
     }
@@ -41,6 +42,7 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
 
     @Override
     public void onBindViewHolder(@NonNull NamesViewHolder holder, int position) {
+        MyContact myContact = names.get(position);
         String currentName = names.get(position).getName();
         String currentPhone = names.get(position).getPhone();
 
@@ -64,6 +66,9 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 names.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
+                                System.out.println("Adapter position => " + holder.getAdapterPosition());
+                                ContactsDatabase.init(view.getContext())
+                                        .contactsDao().deleteContact(myContact);
                             }
                         })
                         .show();

@@ -21,9 +21,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures{
+        viewBinding true
     }
 }
 
@@ -44,4 +49,9 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    def room_version = "2.4.3"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }
