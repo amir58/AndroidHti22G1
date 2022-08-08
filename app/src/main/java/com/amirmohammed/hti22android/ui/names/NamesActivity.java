@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.amirmohammed.hti22android.R;
+import com.amirmohammed.hti22android.models.Company;
 import com.amirmohammed.hti22android.models.MyContact;
 
 import java.util.ArrayList;
@@ -87,7 +88,9 @@ public class NamesActivity extends AppCompatActivity {
             String contactName = data.getStringExtra("contactName");
             String contactPhone = data.getStringExtra("contactPhone");
 
-            MyContact myContact = new MyContact(contactName, contactPhone);
+            Company company = new Company("SeniorSteps", "0111");
+
+            MyContact myContact = new MyContact(contactName, contactPhone, company);
 
             names.add(myContact);
 

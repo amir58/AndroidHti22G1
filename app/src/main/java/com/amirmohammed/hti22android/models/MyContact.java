@@ -16,9 +16,21 @@ public class MyContact {
     @ColumnInfo(name = "phone")
     private String phone;
 
-    public MyContact(String name, String phone) {
+    @ColumnInfo(name = "company")
+    private Company company;
+
+    public MyContact(String name, String phone, Company company) {
         this.name = name;
         this.phone = phone;
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public int getId() {

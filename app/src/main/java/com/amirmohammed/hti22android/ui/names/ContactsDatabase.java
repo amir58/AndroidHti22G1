@@ -5,10 +5,12 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.amirmohammed.hti22android.models.MyContact;
 
-@Database(entities = {MyContact.class}, version = 1, exportSchema = false)
+@TypeConverters({RoomConverters.class})
+@Database(entities = {MyContact.class}, version = 2, exportSchema = false)
 public abstract class ContactsDatabase extends RoomDatabase {
 
     public abstract ContactsDao contactsDao();
@@ -19,6 +21,5 @@ public abstract class ContactsDatabase extends RoomDatabase {
                 .allowMainThreadQueries()
                 .build();
     }
-
 
 }

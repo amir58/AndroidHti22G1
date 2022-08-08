@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import com.amirmohammed.hti22android.R;
+import com.amirmohammed.hti22android.models.Company;
 import com.amirmohammed.hti22android.models.MyContact;
 import com.amirmohammed.hti22android.ui.apis.NewsActivity;
 import com.amirmohammed.hti22android.ui.fragments.MainFActivity;
 import com.amirmohammed.hti22android.ui.names.NamesActivity;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -24,10 +27,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        arrayListOfObjects();
+//        startActivity(new Intent(this, LayoutsActivity.class));
+//        finish();
+
+//        arrayListOfObjects();
+        saveObject();
     }
 
-    private void arrayList(){
+
+    private void saveObject() {
+        Company company = new Company("SeniorSteps", "0111");
+        MyContact myContact = new MyContact("Ahmed","010", company);
+        // {"name":"Ahmed", "phone":"010"}
+
+        Gson gson = new Gson();
+        String myContactJson = gson.toJson(myContact);
+
+        SharedPreferences sharedPreferences =
+                getSharedPreferences("userData", MODE_PRIVATE);
+
+        sharedPreferences.edit()
+                .putString("myContact", myContactJson).apply();
+    }
+
+    private void arrayList() {
         // String[] names = new String[10];
         // String[] names = {"",""};
 
@@ -67,14 +90,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void arrayListOfObjects(){
+    private void arrayListOfObjects() {
         // ArrayList<ClassName> varName = new ArrayList();
         ArrayList<MyContact> myContacts = new ArrayList<>();
+        Company company = new Company("SeniorSteps", "0111");
 
-        MyContact myContact1 = new MyContact("Ali", "010");
+        MyContact myContact1 = new MyContact("Ali", "010", company);
         myContacts.add(myContact1);
 
-        MyContact myContact2 = new MyContact("Mahmoud", "011");
+        MyContact myContact2 = new MyContact("Mahmoud", "011", company);
         myContacts.add(myContact2);
 
         // 0 -> Ali

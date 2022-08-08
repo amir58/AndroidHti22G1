@@ -7,10 +7,12 @@
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.2705" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2705" />
         <entry key="app/src/main/res/drawable/ic_round_add_24.xml" value="0.267" />
+        <entry key="app/src/main/res/drawable/top_rounded_shape.xml" value="0.1405" />
         <entry key="app/src/main/res/layout/activity_add_contact.xml" value="0.246875" />
         <entry key="app/src/main/res/layout/activity_article_details.xml" value="0.188671875" />
         <entry key="app/src/main/res/layout/activity_calculate.xml" value="0.232421875" />
         <entry key="app/src/main/res/layout/activity_intents.xml" value="0.2894399315946986" />
+        <entry key="app/src/main/res/layout/activity_layouts.xml" value="0.232421875" />
         <entry key="app/src/main/res/layout/activity_lifecycle.xml" value="0.11928174433518597" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_main_factivity.xml" value="0.1890625" />
@@ -24,6 +26,7 @@
         <entry key="app/src/main/res/layout/fragment_calls.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.232421875" />
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.221875" />
+        <entry key="app/src/main/res/layout/item_course.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_names.xml" value="0.33" />
         <entry key="app/src/main/res/layout/iten_news.xml" value="0.188671875" />
         <entry key="app/src/main/res/menu/contacts_menu.xml" value="0.2453125" />

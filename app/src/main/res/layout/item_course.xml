@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_170sdp"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/android_ios" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:text="٢ كورسات"
+                app:cornerRadius="@dimen/_15sdp"
+                android:textStyle="bold"
+                app:iconGravity="textEnd"
+                app:icon="@drawable/ic_baseline_menu_book_24"
+                android:backgroundTint="#2196F3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCoursesCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="برمجة تطبيقات"
+                android:gravity="center"
+                android:textSize="@dimen/_10ssp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvCourseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="محمود مصطفي "
+                android:gravity="center"
+                android:paddingTop="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toTopOf="@id/tvCoursesCategory"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
