@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.MyContact;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,11 @@ public class NamesAdapter extends RecyclerView.Adapter<NamesAdapter.NamesViewHol
                                 System.out.println("Adapter position => " + holder.getAdapterPosition());
                                 ContactsDatabase.init(view.getContext())
                                         .contactsDao().deleteContact(myContact);
+
+                                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                                firestore.collection("htiContacts")
+                                        .document(String.valueOf(myContact.getId()))
+                                        .delete();
                             }
                         })
                         .show();

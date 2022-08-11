@@ -13,9 +13,12 @@ import android.view.MenuItem;
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.Company;
 import com.amirmohammed.hti22android.models.MyContact;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Data : ArrayList
 // CustomItem -> layout
@@ -79,6 +82,8 @@ public class NamesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,8 +101,15 @@ public class NamesActivity extends AppCompatActivity {
 
             namesAdapter.notifyDataSetChanged();
 
-            ContactsDatabase.init(NamesActivity.this)
+            long contactId = ContactsDatabase.init(NamesActivity.this)
                     .contactsDao().insertContact(myContact);
+
+            myContact.setId((int) contactId);
+
+            firestore.collection("htiContacts")
+                    .document(String.valueOf(contactId))
+                    .set(myContact);
+
 
         } else if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");
@@ -116,6 +128,13 @@ public class NamesActivity extends AppCompatActivity {
             ContactsDatabase.init(NamesActivity.this)
                     .contactsDao().updateContact(myContact);
 
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", contactName);
+            map.put("phone", contactPhone);
+
+            firestore.collection("htiContacts")
+                    .document(String.valueOf(myContact.getId()))
+                    .update(map);
         }
 
 

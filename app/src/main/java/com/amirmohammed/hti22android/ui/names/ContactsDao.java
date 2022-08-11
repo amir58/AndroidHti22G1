@@ -17,7 +17,7 @@ public interface ContactsDao {
     List<MyContact> getContacts();
 
     @Insert
-    void insertContact(MyContact myContact);
+    long insertContact(MyContact myContact);
 
     @Update
     void updateContact(MyContact myContact);
