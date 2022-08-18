@@ -25,6 +25,9 @@ public class MyContact {
         this.company = company;
     }
 
+    public MyContact() {
+    }
+
     public Company getCompany() {
         return company;
     }

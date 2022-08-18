@@ -7,13 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.Company;
 import com.amirmohammed.hti22android.models.MyContact;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +30,8 @@ import java.util.Map;
 // Adapter -> bind data on ui
 // NamesActivity -> java code , ui
 public class NamesActivity extends AppCompatActivity {
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     List<MyContact> names = new ArrayList<>();
     NamesAdapter namesAdapter; // Make adapter as a global variable
@@ -56,6 +63,21 @@ public class NamesActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(namesAdapter);
 
+//        getNamesFromFirebase();
+    }
+
+    void getNamesFromFirebase() {
+        firestore.collection("htiContacts").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot query) {
+                        for (DocumentSnapshot document : query.getDocuments()) {
+                            MyContact myContact = document.toObject(MyContact.class);
+                            names.add(myContact);
+                        }
+                        namesAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     IUpdateContact iUpdateContact = new IUpdateContact() {
@@ -82,7 +104,6 @@ public class NamesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -108,8 +129,18 @@ public class NamesActivity extends AppCompatActivity {
 
             firestore.collection("htiContacts")
                     .document(String.valueOf(contactId))
-                    .set(myContact);
-
+                    .set(myContact)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.i("NamesActivity", "onSuccess: ");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.i("NamesActivity", "onFailure: " + e);
+                        }
+                    });
 
         } else if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");

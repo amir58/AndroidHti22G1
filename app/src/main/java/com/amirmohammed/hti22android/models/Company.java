@@ -12,6 +12,9 @@ public class Company {
         this.companyPhone = companyPhone;
     }
 
+    public Company() {
+    }
+
     public String getCompanyName() {
         return companyName;
     }

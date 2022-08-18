@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/layout/activity_intents.xml" value="0.2894399315946986" />
         <entry key="app/src/main/res/layout/activity_layouts.xml" value="0.232421875" />
         <entry key="app/src/main/res/layout/activity_lifecycle.xml" value="0.11928174433518597" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.211328125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_main_factivity.xml" value="0.1890625" />
         <entry key="app/src/main/res/layout/activity_menus.xml" value="0.2484375" />
@@ -21,7 +22,8 @@
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.188671875" />
         <entry key="app/src/main/res/layout/activity_pick_image.xml" value="0.23514322359982898" />
         <entry key="app/src/main/res/layout/activity_receive.xml" value="0.20735356990166737" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.12048192771084337" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.211328125" />
         <entry key="app/src/main/res/layout/activity_update_contact.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/fragment_calls.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.232421875" />
