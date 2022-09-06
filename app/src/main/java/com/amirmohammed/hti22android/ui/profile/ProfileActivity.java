@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.amirmohammed.hti22android.R;
@@ -35,6 +36,8 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
+    EditText editTextUsername;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         binding.ivProfilePicture.setOnClickListener(view -> selectImage());
 
+        binding.btnUpdate.setOnClickListener(view -> updateUser());
     }
 
     private void getUser() {
@@ -67,6 +71,23 @@ public class ProfileActivity extends AppCompatActivity {
     private void updateUi(User user){
         Glide.with(this).load(user.getImageUrl()).circleCrop().into(binding.ivProfilePicture);
 
+        binding.etUsername.setText(user.getUsername());
+        binding.etPhone.setText(user.getPhone());
+        binding.etEmail.setText(user.getEmail());
+        binding.etGender.setText(user.getGender());
+    }
+
+    private void updateUser(){
+        Map<String, Object> userData= new HashMap<>();
+        userData.put("username", binding.etUsername.getText().toString());
+        userData.put("phone", binding.etPhone.getText().toString());
+        userData.put("email", binding.etEmail.getText().toString());
+        userData.put("gender", binding.etGender.getText().toString());
+
+        firestore.collection("androidHti22Users")
+                .document(firebaseAuth.getUid())
+                .update(userData)
+                .addOnSuccessListener(runnable -> Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show());
     }
 
 
@@ -134,3 +155,4 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 }
+

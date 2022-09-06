@@ -25,9 +25,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getFcmTokenAndUpdateIt();
 
 //        startActivity(new Intent(this, LayoutsActivity.class));
 //        finish();
@@ -224,6 +229,26 @@ public class MainActivity extends AppCompatActivity {
     public void navigateToProfileActivity(View view) {
         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(intent);
+    }
+
+
+    private void getFcmTokenAndUpdateIt() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String token) {
+                        Log.i(TAG, "onSuccess: " + token);
+
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("fcmToken", token);
+
+                        FirebaseFirestore.getInstance()
+                                .collection("androidHti22Users")
+                                .document(FirebaseAuth.getInstance().getUid())
+                                .update(map);
+
+                    }
+                });
     }
 
 }
