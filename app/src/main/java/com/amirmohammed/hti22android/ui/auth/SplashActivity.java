@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.ui.MainActivity;
+import com.amirmohammed.hti22android.ui.auth.login.view.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {

@@ -1,6 +1,5 @@
 package com.amirmohammed.hti22android.ui;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -16,11 +15,10 @@ import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.Company;
 import com.amirmohammed.hti22android.models.MyContact;
 import com.amirmohammed.hti22android.ui.apis.NewsActivity;
-import com.amirmohammed.hti22android.ui.auth.LoginActivity;
+import com.amirmohammed.hti22android.ui.auth.login.view.LoginActivity;
 import com.amirmohammed.hti22android.ui.fragments.MainFActivity;
 import com.amirmohammed.hti22android.ui.names.NamesActivity;
 import com.amirmohammed.hti22android.ui.profile.ProfileActivity;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +29,17 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+// Design Patterns => Singleton , Builder, Observer , Factory
+
+// Architecture Pattern =>
+// MVC => Model, View, Controller
+// MVP => Model, View, Presenter
+// MVVM=> Model, View, ViewModel
+// MVI => Model, View, Intent
+
+// View => Activity, Fragment, Dialog
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

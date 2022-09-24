@@ -1,4 +1,4 @@
-package com.amirmohammed.hti22android.models;
+package com.amirmohammed.hti22android.ui.auth.login.model;
 
 import com.google.gson.annotations.SerializedName;
 
