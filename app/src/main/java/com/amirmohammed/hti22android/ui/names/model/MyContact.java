@@ -1,8 +1,10 @@
-package com.amirmohammed.hti22android.models;
+package com.amirmohammed.hti22android.ui.names.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.amirmohammed.hti22android.models.Company;
 
 @Entity
 public class MyContact {

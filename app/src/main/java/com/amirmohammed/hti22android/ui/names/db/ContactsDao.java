@@ -1,4 +1,4 @@
-package com.amirmohammed.hti22android.ui.names;
+package com.amirmohammed.hti22android.ui.names.db;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.names.model.MyContact;
 
 import java.util.List;
 

@@ -13,11 +13,11 @@ import android.widget.Toast;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.Company;
-import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.names.model.MyContact;
 import com.amirmohammed.hti22android.ui.apis.NewsActivity;
 import com.amirmohammed.hti22android.ui.auth.login.view.LoginActivity;
 import com.amirmohammed.hti22android.ui.fragments.MainFActivity;
-import com.amirmohammed.hti22android.ui.names.NamesActivity;
+import com.amirmohammed.hti22android.ui.names.view.contacts.NamesActivity;
 import com.amirmohammed.hti22android.ui.profile.ProfileActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

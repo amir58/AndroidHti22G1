@@ -37,13 +37,13 @@
             android:name=".ui.apis.NewsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.names.UpdateContactActivity"
+            android:name=".ui.names.view.UpdateContactActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.names.AddContactActivity"
+            android:name=".ui.names.view.AddContactActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.names.NamesActivity"
+            android:name=".ui.names.view.contacts.NamesActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MenusActivity"

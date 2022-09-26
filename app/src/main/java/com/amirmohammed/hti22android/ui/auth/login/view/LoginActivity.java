@@ -64,9 +64,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginObservers() {
-        viewModel.loginSuccessState.observe(this, unused -> onLoginSuccess());
+        viewModel.getLoginSuccessState().observe(this, unused -> onLoginSuccess());
 
-        viewModel.loginFailureState.observe(this, errorMessage -> onLoginFailure(errorMessage));
+        viewModel.getLoginFailureState().observe(this, errorMessage -> onLoginFailure(errorMessage));
     }
 
     private void onLoginSuccess() {

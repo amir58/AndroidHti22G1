@@ -1,4 +1,4 @@
-package com.amirmohammed.hti22android.ui.names;
+package com.amirmohammed.hti22android.ui.names.db;
 
 import androidx.room.TypeConverter;
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.names.AddContactActivity">
+    tools:context=".ui.names.view.AddContactActivity">
 
     <TextView
         android:layout_width="match_parent"

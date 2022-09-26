@@ -1,4 +1,4 @@
-package com.amirmohammed.hti22android.ui.names;
+package com.amirmohammed.hti22android.ui.names.adapters;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amirmohammed.hti22android.R;
-import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.names.model.MyContact;
+import com.amirmohammed.hti22android.ui.names.db.ContactsDatabase;
+import com.amirmohammed.hti22android.ui.names.view.IUpdateContact;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // 1 : Constructor -> data

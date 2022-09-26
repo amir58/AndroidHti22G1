@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -17,8 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginViewModel extends ViewModel {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-    MutableLiveData<Void> loginSuccessState = new MutableLiveData<>();
-    MutableLiveData<String> loginFailureState = new MutableLiveData<>();
+   private final MutableLiveData<Void> loginSuccessState = new MutableLiveData<>();
+   private final MutableLiveData<String> loginFailureState = new MutableLiveData<>();
 
 
     public void login(String email, String password) {
@@ -26,5 +27,14 @@ public class LoginViewModel extends ViewModel {
                 .addOnSuccessListener(authResult -> loginSuccessState.postValue(null))
                 .addOnFailureListener(e -> loginFailureState.setValue(e.getLocalizedMessage()));
     }
+
+    LiveData<Void> getLoginSuccessState(){
+        return loginSuccessState;
+    }
+
+    LiveData<String> getLoginFailureState(){
+        return loginFailureState;
+    }
+
 
 }

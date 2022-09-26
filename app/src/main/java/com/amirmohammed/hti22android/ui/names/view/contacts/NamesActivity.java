@@ -1,8 +1,10 @@
-package com.amirmohammed.hti22android.ui.names;
+package com.amirmohammed.hti22android.ui.names.view.contacts;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -13,7 +15,12 @@ import android.view.MenuItem;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.models.Company;
-import com.amirmohammed.hti22android.models.MyContact;
+import com.amirmohammed.hti22android.ui.names.db.ContactsDatabase;
+import com.amirmohammed.hti22android.ui.names.model.MyContact;
+import com.amirmohammed.hti22android.ui.names.adapters.NamesAdapter;
+import com.amirmohammed.hti22android.ui.names.view.AddContactActivity;
+import com.amirmohammed.hti22android.ui.names.view.IUpdateContact;
+import com.amirmohammed.hti22android.ui.names.view.UpdateContactActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,56 +36,60 @@ import java.util.Map;
 // CustomItem -> layout
 // Adapter -> bind data on ui
 // NamesActivity -> java code , ui
+
 public class NamesActivity extends AppCompatActivity {
+    private final int ADD_CONTACT_REQUEST_CODE = 5;
 
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-
-    List<MyContact> names = new ArrayList<>();
     NamesAdapter namesAdapter; // Make adapter as a global variable
+    List<MyContact> names = new ArrayList<>();
+    private final FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+    ContactsViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_names);
 
-        names = ContactsDatabase.init(NamesActivity.this)
-                .contactsDao().getContacts();
-
-//        names.add(new MyContact("Amir", "01116036522"));
-//        names.add(new MyContact("Ali", "01030936083"));
-//        names.add(new MyContact("Ahmed", "01256052932"));
-//        names.add(new MyContact("Amir", "01116036522"));
-//        names.add(new MyContact("Ali", "01030936083"));
-//        names.add(new MyContact("Ahmed", "01256052932"));
-//        names.add(new MyContact("Amir", "01116036522"));
-//        names.add(new MyContact("Ali", "01030936083"));
-//        names.add(new MyContact("Ahmed", "01256052932"));
-//        names.add(new MyContact("Amir", "01116036522"));
-//        names.add(new MyContact("Ali", "01030936083"));
-//        names.add(new MyContact("Ahmed", "01256052932"));
-
+        viewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.rvNames);
 
-        namesAdapter = new NamesAdapter(names, iUpdateContact);
-
-        recyclerView.setAdapter(namesAdapter);
-
-//        getNamesFromFirebase();
-    }
-
-    void getNamesFromFirebase() {
-        firestore.collection("htiContacts").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        viewModel.getContactsFromRoomDB(NamesActivity.this)
+                .observe(this, new Observer<List<MyContact>>() {
                     @Override
-                    public void onSuccess(QuerySnapshot query) {
-                        for (DocumentSnapshot document : query.getDocuments()) {
-                            MyContact myContact = document.toObject(MyContact.class);
-                            names.add(myContact);
-                        }
-                        namesAdapter.notifyDataSetChanged();
+                    public void onChanged(List<MyContact> myContacts) {
+                        names = myContacts;
+                        namesAdapter = new NamesAdapter(names, iUpdateContact);
+                        recyclerView.setAdapter(namesAdapter);
                     }
                 });
+
+
+        viewModel.getContactChangedState().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer contactPosition) {
+                namesAdapter.notifyItemChanged(contactPosition);
+            }
+        });
+
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+//        names.add(new MyContact("Amir", "01116036522"));
+//        names.add(new MyContact("Ali", "01030936083"));
+//        names.add(new MyContact("Ahmed", "01256052932"));
+
+
+//        getNamesFromFirebase();
+
     }
+
 
     IUpdateContact iUpdateContact = new IUpdateContact() {
         @Override
@@ -110,7 +121,7 @@ public class NamesActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println("onActivityResult");
 
-        if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
+        if (requestCode == ADD_CONTACT_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");
             String contactPhone = data.getStringExtra("contactPhone");
 
@@ -118,29 +129,8 @@ public class NamesActivity extends AppCompatActivity {
 
             MyContact myContact = new MyContact(contactName, contactPhone, company);
 
-            names.add(myContact);
+            viewModel.addNewContact(myContact);
 
-            namesAdapter.notifyDataSetChanged();
-
-            long contactId = ContactsDatabase.init(NamesActivity.this)
-                    .contactsDao().insertContact(myContact);
-
-            myContact.setId((int) contactId);
-
-            firestore.collection("htiContacts")
-                    .document(String.valueOf(contactId))
-                    .set(myContact)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Log.i("NamesActivity", "onSuccess: ");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.i("NamesActivity", "onFailure: " + e);
-                        }
-                    });
 
         } else if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
             String contactName = data.getStringExtra("contactName");
@@ -151,21 +141,7 @@ public class NamesActivity extends AppCompatActivity {
             myContact.setName(contactName);
             myContact.setPhone(contactPhone);
 
-            names.remove(contactPosition);
-            names.add(contactPosition, myContact);
-
-            namesAdapter.notifyItemChanged(contactPosition);
-
-            ContactsDatabase.init(NamesActivity.this)
-                    .contactsDao().updateContact(myContact);
-
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", contactName);
-            map.put("phone", contactPhone);
-
-            firestore.collection("htiContacts")
-                    .document(String.valueOf(myContact.getId()))
-                    .update(map);
+            viewModel.updateContact(contactPosition, myContact);
         }
 
 
