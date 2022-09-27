@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.amirmohammed.hti22android.R;
 import com.amirmohammed.hti22android.ui.MainActivity;
+import com.amirmohammed.hti22android.ui.nc.MainNCActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (firebaseAuth.getCurrentUser() == null) {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                     } else {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainNCActivity.class));
                     }
                     finish();
 

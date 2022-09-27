@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.amirmohammed.hti22android.ui.nc.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_balanceFragment"
+            app:destination="@id/balanceFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sendMoneyNameFragment"
+            app:destination="@id/sendMoneyNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendMoneyAmountFragment"
+        android:name="com.amirmohammed.hti22android.ui.nc.SendMoneyAmountFragment"
+        android:label="fragment_send_money_amount"
+        tools:layout="@layout/fragment_send_money_amount" />
+    <fragment
+        android:id="@+id/balanceFragment"
+        android:name="com.amirmohammed.hti22android.ui.nc.BalanceFragment"
+        android:label="fragment_balance"
+        tools:layout="@layout/fragment_balance" />
+    <fragment
+        android:id="@+id/sendMoneyNameFragment"
+        android:name="com.amirmohammed.hti22android.ui.nc.SendMoneyNameFragment"
+        android:label="fragment_send_money_name"
+        tools:layout="@layout/fragment_send_money_name" >
+        <action
+            android:id="@+id/action_sendMoneyNameFragment_to_sendMoneyAmountFragment"
+            app:destination="@id/sendMoneyAmountFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
+</navigation>

@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.211328125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_main_factivity.xml" value="0.1890625" />
+        <entry key="app/src/main/res/layout/activity_main_ncactivity.xml" value="0.165625" />
         <entry key="app/src/main/res/layout/activity_menus.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_names.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_news.xml" value="0.188671875" />
@@ -26,9 +27,14 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.211328125" />
         <entry key="app/src/main/res/layout/activity_update_contact.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/fragment_balance.xml" value="0.10555555555555556" />
         <entry key="app/src/main/res/layout/fragment_calls.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.232421875" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.211328125" />
+        <entry key="app/src/main/res/layout/fragment_send_money_amount.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/fragment_send_money_name.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.221875" />
+        <entry key="app/src/main/res/layout/fragment_transactions.xml" value="0.211328125" />
         <entry key="app/src/main/res/layout/item_course.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_names.xml" value="0.33" />
         <entry key="app/src/main/res/layout/iten_news.xml" value="0.188671875" />
